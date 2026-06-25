@@ -71,6 +71,56 @@
             <input type="text" name="autoLocation" id="otherAutoTextLoc" hidden>
         </label><br>
 
+        <p>If they had an Auto did they?</p>
+        <label>
+            <input type="checkbox" name="autoDo" value="shoot">Shoot Balls
+        </label><br>
+        <label>
+            <input type="checkbox" name="autoDo" value="intake">Intake More Balls
+        </label><br>
+        <label>
+            <input type="checkbox" name="autoDo" value="climb">Climb
+        </label><br>
+        <label>
+            <input type="checkbox" name="autoDo" value="none">None of the above(or if they did not have an auto click this)
+        </label><br><br>
+
+        <h4>TELE-OP<br>The rest of the match</h4>
+
+        <p>What was there role?</p>
+         <label>
+            <input type="checkbox" name="role" value="scoring">Scoring
+        </label><br>
+        <label>
+            <input type="checkbox" name="role" value="defense">Defense
+        </label><br>
+        <label>
+            <input type="checkbox" name="role" value="support">Support
+        </label><br>
+        <label>
+            <input type="checkbox" name="role" id="otherRole">Other
+        </label>
+        <label>
+            <input type="text" name="role" id="otherTextRole" hidden>
+        </label><br>
+
+        <p>Rate how good were they at their role out of 5.</p>
+        <label> <!--TODO make CSS to make it look like a star-->
+            <input type="radio" name="roleRating" class="star" value="1-star" required>1
+        </label>
+        <label> 
+            <input type="radio" name="roleRating" class="star" value="2-star">2
+        </label>
+        <label> 
+            <input type="radio" name="roleRating" class="star" value="3-star">3
+        </label>
+        <label> 
+            <input type="radio" name="roleRating" class="star" value="4-star">4
+        </label>
+        <label> 
+            <input type="radio" name="roleRating" class="star" value="5-star">5
+        </label>
+
         <button type="submit">Submit</button>
 
         <script src="script.js" defer></script>

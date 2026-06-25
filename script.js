@@ -3,7 +3,7 @@
 //This is more as a reminder for me to remember how to open this
 //It will probobly be different for you
 //$ cd ~/Desktop/robotics\ Scouting\ form
-//$ npx serve
+//$ cd ~/Desktop/robotics\ Scouting\ form
 //Then go to http://localhost:3000 
 //Then click on the html file!
 //testing
@@ -41,10 +41,10 @@ function setupOther(buttonID, textboxID){
 }
 
 setupOther("otherAutoLoc", "otherAutoTextLoc");
-//setupOther("otherAutoRole", "otherAutoTextRole"); 
+setupOther("otherRole", "otherTextRole"); 
 
 const form = document.getElementById("scoutingForm");
-const checkboxList = ["autoLocation"];
+const checkboxList = ["autoLocation", "autoDo", "role"];
 
 form.addEventListener("submit", function(event){
     let missedList = [];
@@ -71,7 +71,7 @@ form.addEventListener("submit", function(event){
     }
 });
 
-const translate = ["\"Where did they go in auto?\""];
+const translate = ["\"Where did they go in auto?\"", "\"If they had an Auto did they?\"", "\"What was there role?\""];
 
 function codeToEnglish(word){
     for(let i = 0; i < checkboxList.length; i++){
