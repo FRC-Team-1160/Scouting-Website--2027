@@ -1,0 +1,80 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotics Scouting Website</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head> 
+
+<body>
+    <h2>Robotics Scouting Form</h2> 
+
+    <form autocomplete="off" id="scoutingForm">
+        <label for="email">Please enter your email:</label><br>
+        <input type="email" id="email" name="email" required autofocus autocomplete="on"><br><br>
+
+        <label for="comp">Which Comp is this:</label><br>
+        <select id="comp" name ="comp" required>
+            <option value="" disabled selected hidden>Please pick an option</option>
+            <option value="ventura">CA District Ventura County Event 2026</option>
+            <option value="SGV">CA District San Gabriel Valley Event 2026</option>
+            <option value="SoCalCamp">FIRST California Southern State Championship presented by Qualcomm 2026</option>
+        </select><br>
+
+        <p>Red or Blue?</p>
+
+        <label>
+            <input type="radio" name="teamColor" value="red" required>Red
+        </label><br>
+
+        <label>
+            <input type="radio" name="teamColor" value="blue">Blue
+        </label><br><br>
+
+        <label for="team">Team Number</label><br>
+
+        <select name="team" id="team"required>
+            <option value="" disabled selected hidden>
+                Pick a Team
+            </option>
+        </select><br><br>
+
+        <h4>AUTO<br>First 15 seconds of the match where robots control themselves</h4>
+        
+
+        <p>Where did they go in auto?</p><br>
+
+        <label>
+            <input type="checkbox" name="autoLocation" value="nowhere">Nowhere
+        </label><br>
+        <label>
+            <input type="checkbox" name="autoLocation" value="depot">Depot
+        </label><br>
+        <label>
+            <input type="checkbox" name="autoLocation" value="neutralZone">Neutral Zone
+        </label><br>
+        <label>
+            <input type="checkbox" name="autoLocation" value="humanPlayerStation">Human Player Station
+        </label><br>
+        <label>
+            <input type="checkbox" name="autoLocation" value="hub">The Hub
+        </label><br>
+        <label>
+            <input type="checkbox" name="autoLocation" value="tower">The Tower
+        </label><br>
+        <label>
+            <input type="checkbox" name="autoLocation" id="otherAutoLoc">Other
+        </label>
+        <label>
+            <input type="text" name="autoLocation" id="otherAutoTextLoc" hidden>
+        </label><br>
+
+        <button type="submit">Submit</button>
+
+        <script src="script.js" defer></script>
+    </form>
+</body> 
+
+</html>
