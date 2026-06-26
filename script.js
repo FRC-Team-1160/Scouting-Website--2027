@@ -7,7 +7,9 @@
 //Then go to http://localhost:3000 
 //Then click on the html file!
 //testing
-fetch("2026casgv_team_list.csv")
+const teamList = "2026casgv_team_list.csv";
+
+fetch(teamList) //Gathers the teamList from the csv file and puts it into the slecet drop down question because I am not manually doing that for every single comp
 	.then(response => response.text())
 	.then(data => {
 		const lines = data.split('\n');
@@ -27,7 +29,7 @@ fetch("2026casgv_team_list.csv")
     }
 });
 
-function setupOther(buttonID, textboxID){
+function setupOther(buttonID, textboxID){ //This sets up other boxs allowing people to write an awnser in if they select the other checkbox
 
     const button = document.getElementById(buttonID);
     const textbox = document.getElementById(textboxID);
@@ -40,13 +42,13 @@ function setupOther(buttonID, textboxID){
     });
 }
 
-setupOther("otherAutoLoc", "otherAutoTextLoc");
+setupOther("otherAutoLoc", "otherAutoTextLoc"); //this actually sets up the other
 setupOther("otherRole", "otherTextRole"); 
 
 const form = document.getElementById("scoutingForm");
-const checkboxList = ["autoLocation", "autoDo", "role", "travel"];
+const checkboxList = ["autoLocation", "autoDo", "role", "travel"]; //This is a list of checkbox questions
 
-form.addEventListener("submit", function(event){
+form.addEventListener("submit", function(event){ //this makes the checkbox listed "required" in a sense by not letting you submit and telling you what you missed
     let missedList = [];
     for(let i = 0; i < checkboxList.length; i++){
             const boxes = document.querySelectorAll(`input[type="checkbox"][name=${checkboxList[i]}]`);
@@ -61,7 +63,7 @@ form.addEventListener("submit", function(event){
                     missedList.push(checkboxList[i]);
                 }
     }
-    if(missedList.length != 0){
+    if(missedList.length != 0){ //tells you which checkboxes you missed
         let word = "You need to awnser: " + codeToEnglish(missedList[0]);
         for(let i = 1; i < missedList.length; i++){
             word += ", " + codeToEnglish(missedList[i]);
@@ -72,7 +74,7 @@ form.addEventListener("submit", function(event){
 });
 
 const translate = ["\"Where did they go in auto?\"", "\"If they had an Auto did they?\"", "\"What was there role?\"","\"Travel Preference\""];
-
+//an inegenous function that translates code to english by matching two different arrays, without the use of a file of dictonary as those are unnessary on such small of a scale
 function codeToEnglish(word){
     for(let i = 0; i < checkboxList.length; i++){
         if(word == checkboxList[i]){
