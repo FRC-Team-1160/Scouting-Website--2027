@@ -44,7 +44,7 @@ setupOther("otherAutoLoc", "otherAutoTextLoc");
 setupOther("otherRole", "otherTextRole"); 
 
 const form = document.getElementById("scoutingForm");
-const checkboxList = ["autoLocation", "autoDo", "role"];
+const checkboxList = ["autoLocation", "autoDo", "role", "travel"];
 
 form.addEventListener("submit", function(event){
     let missedList = [];
@@ -71,7 +71,7 @@ form.addEventListener("submit", function(event){
     }
 });
 
-const translate = ["\"Where did they go in auto?\"", "\"If they had an Auto did they?\"", "\"What was there role?\""];
+const translate = ["\"Where did they go in auto?\"", "\"If they had an Auto did they?\"", "\"What was there role?\"","\"Travel Preference\""];
 
 function codeToEnglish(word){
     for(let i = 0; i < checkboxList.length; i++){
