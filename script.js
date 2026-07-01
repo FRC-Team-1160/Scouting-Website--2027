@@ -34,19 +34,37 @@ function setupOther(buttonID, textboxID){ //This sets up other boxs allowing peo
     const button = document.getElementById(buttonID);
     const textbox = document.getElementById(textboxID);
 
-    button.addEventListener("change", function(){
+    if(button.type == "checkbox"){
+        button.addEventListener("change", function(){
 
-        textbox.hidden = !button.checked;
-        textbox.required = button.checked;
+            textbox.hidden = !button.checked;
+            textbox.required = button.checked;
+            textbox.value = "";
 
-    });
+        });
+    }
+    if(button.type == "radio"){
+        const radios = document.querySelectorAll(`input[type="radio"][name=${button.name}]`);
+        for(let i = 0; i < radios.length; i++){
+            radios[i].addEventListener("change", function(){
+                textbox.hidden = !button.checked;
+                textbox.required = button.checked;
+                textbox.value = "";
+            });
+        }
+    }
 }
 
 setupOther("otherAutoLoc", "otherAutoTextLoc"); //this actually sets up the other
 setupOther("otherRole", "otherTextRole"); 
+setupOther("otherClimb", "otherTextClimb");
+setupOther("otherClimbLoc", "otherTextClimbLoc");
+setupOther("disabledYes", "disabledText");
+setupOther("dqYes", "dqText");
+
 
 const form = document.getElementById("scoutingForm");
-const checkboxList = ["autoLocation", "autoDo", "role", "travel"]; //This is a list of checkbox questions
+const checkboxList = ["autoLocation", "autoDo", "role", "travel", "climbLocation"]; //This is a list of checkbox questions
 
 form.addEventListener("submit", function(event){ //this makes the checkbox listed "required" in a sense by not letting you submit and telling you what you missed
     let missedList = [];
@@ -73,7 +91,7 @@ form.addEventListener("submit", function(event){ //this makes the checkbox liste
     }
 });
 
-const translate = ["\"Where did they go in auto?\"", "\"If they had an Auto did they?\"", "\"What was there role?\"","\"Travel Preference\""];
+const translate = ["\"Where did they go in auto?\"", "\"If they had an Auto did they?\"", "\"What was there role?\"","\"Travel Preference\"", "\"Where did they climb?\""];
 //an inegenous function that translates code to english by matching two different arrays, without the use of a file of dictonary as those are unnessary on such small of a scale
 function codeToEnglish(word){
     for(let i = 0; i < checkboxList.length; i++){

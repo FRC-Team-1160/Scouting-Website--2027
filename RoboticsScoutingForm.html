@@ -174,10 +174,10 @@
 
         <p class="question">Did they pull their own weight?(Did they get carried?)</p>
         <label>
-            <input type="radio" name="carry" value="yes" required>Yes
+            <input type="radio" name="carry" value="no" required>No
         </label><br>
         <label>
-            <input type="radio" name="carry" value="no">No
+            <input type="radio" name="carry" value="yes">Yes
         </label><br><br>
 
         <p class="question">Travel Preference</p>
@@ -187,6 +187,74 @@
         <label>
             <input type="checkbox" name="travel" value="trench">Trench
         </label><br>
+
+        <p class="question">Climb?</p>
+        <label>
+            <input type="radio" name="climb" value="scoredNoClimb" required>No scored instead
+        </label><br>
+        <label>
+            <input type="radio" name="climb" value="failedClimb">No tried but failed
+        </label><br>
+        <label>
+            <input type="radio" name="climb" value="lvl1">Level 1
+        </label><br>
+        <label>
+            <input type="radio" name="climb" value="lvl2">Level 2
+        </label><br>
+        <label>
+            <input type="radio" name="climb" value="lvl3">Level 3
+        </label><br>
+        <label>
+            <input type="radio" name="climb" id="otherClimb">Other
+        </label>
+        <label>
+            <input type="text" name="climb" id="otherTextClimb" hidden>
+        </label><br>
+
+        <p class="question">Where did they climb?</p>
+        <label>
+            <input type="checkbox" name="climbLocation" value="betweenPoles">Between the poles
+        </label><br>
+        <label>
+            <input type="checkbox" name="climbLocation" value="onSides">On the sides
+        </label><br>
+        <label>
+            <input type="checkbox" name="climbLocation" value="noClimb">Did not climb
+        </label><br>
+        <label>
+            <input type="checkbox" name="climbLocation" id="otherClimbLoc">Other
+        </label>
+        <label>
+            <input type="text" name="climbLocation" id="otherTextClimbLoc" hidden>
+        </label><br>
+
+        <p class="question">Did they get disabled?if Yes and explain why</p>
+        <label>
+            <input type="radio" name="disabled" value="no" required>No
+        </label><br>
+        <label>
+            <input type="radio" name="disabled" id ="disabledYes">Yes
+        </label>
+        <label>
+            <input type="text" name="disabled" id="disabledText" hidden>
+        </label><br>
+
+        <p class="question">Did they get DQed?if Yes and explain why</p>
+        <label>
+            <input type="radio" name="dq" value="no" required>No
+        </label><br>
+        <label>
+            <input type="radio" name="dq" id ="dqYes">Yes
+        </label>
+        <label>
+            <input type="text" name="dq" id="dqText" hidden>
+        </label><br>
+
+        <p class="question">Is there anything else we should know about the robot(NOT required)</p>
+        <label>
+            <input type="text" name="notes">
+        </label><br><br>
+
         <button type="submit">Submit</button>
 
         <script src="script.js" defer></script>
