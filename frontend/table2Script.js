@@ -24,6 +24,7 @@ fetch("/search-submit?comp=" + encodeURIComponent(comp))
                     <td>${codeToEnglishTable(row.travel.replaceAll(',', ' '))}</td>
                     <td>${codeToEnglishTable(row.robot_climb.replaceAll(',', ' '))}</td> 
                     <td>${codeToEnglishTable(row.climbLocation.replaceAll(',', ' '))}</td>    
+                     <td>${codeToEnglishTable(row.disabled.replaceAll(',', ' '))}</td>
                    
                 </tr>
             `;
@@ -33,7 +34,7 @@ fetch("/search-submit?comp=" + encodeURIComponent(comp))
         /*  
            
              
-            <td>${row.disabled}</td>
+           
             <td>${row.dq}</td>
             <td>${row.notes}</td> 
         

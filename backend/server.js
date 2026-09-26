@@ -47,6 +47,7 @@ app.get('/search-submit', (req, res) => {
 
 function getSearchData(comp){
     //That is a testing value comp
+    //THIS THING TOOK ME ACUTAL MONTHS TO RIGHT :sob:
     const data2 = db.prepare(`
         WITH auto_location AS (
             SELECT 
@@ -227,6 +228,26 @@ function getSearchData(comp){
             GROUP BY team
         ),
 
+        disabled_question AS (
+            SELECT
+            d.teamNumber,
+            d.teamNumber || ' - ' || d.teamName AS team,
+            json_extract(d.disabled, '$[0]') AS disabled,
+            count(*) AS disabled_count
+        FROM scoutingData d
+            WHERE d.comp = ?
+            GROUP BY
+            d.teamNumber, d.teamName,  json_extract(d.disabled, '$[0]')
+    ),
+
+        disabled_question_totals AS (
+            SELECT
+                team,
+                SUM(disabled_count) AS total
+            FROM disabled_question
+            GROUP BY team
+        ),
+
         auto_location_combined AS (
         SELECT
             auto_location.teamNumber,
@@ -351,6 +372,24 @@ function getSearchData(comp){
         JOIN robot_climb_location_totals
             ON robot_climb_location.team = robot_climb_location_totals.team
         GROUP BY robot_climb_location.teamNumber, robot_climb_location.team
+        ),
+
+        disabled_question_combined AS (
+        SELECT
+            disabled_question.teamNumber,
+            disabled_question.team,
+            GROUP_CONCAT(
+                disabled_question.disabled || ': ' ||
+                ROUND(
+                    disabled_question.disabled_count * 100.0
+                    / disabled_question_totals.total,
+                    2
+                ) || '%'
+            ) AS disabled
+        FROM disabled_question
+        JOIN disabled_question_totals
+            ON disabled_question.team = disabled_question_totals.team
+        GROUP BY disabled_question.teamNumber, disabled_question.team
         )
 
         SELECT
@@ -366,7 +405,8 @@ function getSearchData(comp){
         carried_question_combined.carry,
         travel_pref_combined.travel,
         robot_climb_combined.robot_climb,
-        robot_climb_location_combined.robot_climb_location AS climbLocation
+        robot_climb_location_combined.robot_climb_location AS climbLocation,
+        disabled_question_combined.disabled
 
         FROM auto_location_combined
 
@@ -400,8 +440,11 @@ function getSearchData(comp){
         LEFT JOIN robot_climb_location_combined
             ON auto_location_combined.team = robot_climb_location_combined.team
 
+        LEFT JOIN disabled_question_combined
+            ON auto_location_combined.team = disabled_question_combined.team
+
         ORDER BY auto_location_combined.teamNumber
-        `).all(comp, comp, comp, comp, comp, comp, comp, comp, comp, comp, comp) //Replaces each question mark with the variable comp
+        `).all(comp, comp, comp, comp, comp, comp, comp, comp, comp, comp, comp, comp) //Replaces each question mark with the variable comp
         console.log(data2);
         return(data2);
     }
