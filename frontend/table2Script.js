@@ -51,6 +51,7 @@ function codeToEnglishTable(text) {
         none: "Nothing",
         scoring: "Scoring",
         defense: "Defense",
+        intake: "Intake",
         support: "Support",
         bump: "Bump",
         trench: "Trench",
@@ -60,7 +61,9 @@ function codeToEnglishTable(text) {
         lvl3: "Climbed lvl 3",
         betweenPoles: "Between Poles",
         onSides: "On Sides",
+        noClimb: "No Climb",
         failedClimb: "Failed Climb",
+
         yes: "Yes",
         no: "No"
     };

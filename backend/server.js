@@ -416,6 +416,10 @@ app.get('/data', (req, res) =>  {
         res.json(data); 
 });
 
+function removeOn(array){
+    return array.filter(item => item !== "on"); //prevents a glitch that causes the word "on" to fill up in the table
+}
+
 app.post('/submit-form', (req, res) => {
     let email = req.body.email; //gets all of the values and converts 
     let comp = req.body.comp; //arrays to strings and filters blank values when neccesary
@@ -424,6 +428,7 @@ app.post('/submit-form', (req, res) => {
     let teamNumber = Number(teamCall[0]);
     let teamName = teamCall[1];
     let autoLocation = req.body.autoLocation.filter(item => item !== "");
+    autoLocation = removeOn(autoLocation);
     autoLocation = JSON.stringify(autoLocation);
     let autoDo = req.body.autoDo
     if (!Array.isArray(autoDo)) { //this turns non arrays to arrays 
@@ -432,6 +437,7 @@ app.post('/submit-form', (req, res) => {
     autoDo = autoDo.filter(item => item !== ""); //I only have to do this for checkboxes without an "other" option 
     autoDo = JSON.stringify(autoDo);
     let role = req.body.role.filter(item => item !== "");
+    role = removeOn(role);
     role = JSON.stringify(role);
     let roleRating = Number(req.body.roleRating);
     let aimRating = Number(req.body.aimRating);
@@ -445,12 +451,16 @@ app.post('/submit-form', (req, res) => {
     travel = travel.filter(item => item !== "");
     travel = JSON.stringify(travel);
     let climb = req.body.climb.filter(item => item !== "");
+    climb = removeOn(climb);
     climb = JSON.stringify(climb);
     let climbLocation = req.body.climbLocation.filter(item => item !== "");
+    climbLocation = removeOn(climbLocation);
     climbLocation = JSON.stringify(climbLocation);
     let disabled = req.body.disabled.filter(item => item !== "");
+    disabled = removeOn(disabled);
     disabled = JSON.stringify(disabled);
     let dq = req.body.dq.filter(item => item !== "");
+    dq = removeOn(dq);
     dq = JSON.stringify(dq);
     let notes = req.body.notes.trim();
     if(notes === ""){
