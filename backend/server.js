@@ -38,8 +38,9 @@ app.post('/search-submit', (req, res) => {
 
 app.get('/search-submit', (req, res) => {
     const comp = req.query.comp;
-
+    
     const data2 = getSearchData(comp);
+    console.log(data2);
 
     res.json(data2);
 });
@@ -206,6 +207,26 @@ function getSearchData(comp){
             GROUP BY team
         ),
 
+        robot_climb_location AS (
+            SELECT
+            rcl.teamNumber,
+            rcl.teamNumber || ' - ' || rcl.teamName AS team,
+            cl.value AS climbLocation,
+            count(*) as climbLocation_count
+        FROM scoutingData rcl,
+            json_each(rcl.climbLocation) cl
+            WHERE rcl.comp = ?
+            GROUP BY rcl.teamNumber, rcl.teamName, cl.value
+        ),
+
+        robot_climb_location_totals AS (
+            SELECT
+                team,
+                SUM(climbLocation_count) AS total
+            FROM robot_climb_location
+            GROUP BY team
+        ),
+
         auto_location_combined AS (
         SELECT
             auto_location.teamNumber,
@@ -312,7 +333,25 @@ function getSearchData(comp){
         JOIN robot_climb_totals
             ON robot_climb.team = robot_climb_totals.team
         GROUP BY robot_climb.teamNumber, robot_climb.team
-      )
+      ),
+
+        robot_climb_location_combined AS (
+        SELECT
+            robot_climb_location.teamNumber,
+            robot_climb_location.team,
+            GROUP_CONCAT(
+                robot_climb_location.climbLocation || ': ' ||
+                ROUND(
+                    robot_climb_location.climbLocation_count * 100.0
+                    / robot_climb_location_totals.total,
+                    2
+                ) || '%'
+            ) AS robot_climb_location
+        FROM robot_climb_location
+        JOIN robot_climb_location_totals
+            ON robot_climb_location.team = robot_climb_location_totals.team
+        GROUP BY robot_climb_location.teamNumber, robot_climb_location.team
+        )
 
         SELECT
         auto_location_combined.teamNumber,
@@ -326,7 +365,8 @@ function getSearchData(comp){
         shoot_rating.shootRating,
         carried_question_combined.carry,
         travel_pref_combined.travel,
-        robot_climb_combined.robot_climb
+        robot_climb_combined.robot_climb,
+        robot_climb_location_combined.robot_climb_location AS climbLocation
 
         FROM auto_location_combined
 
@@ -357,11 +397,12 @@ function getSearchData(comp){
         LEFT JOIN robot_climb_combined
             ON auto_location_combined.team = robot_climb_combined.team
         
-            
+        LEFT JOIN robot_climb_location_combined
+            ON auto_location_combined.team = robot_climb_location_combined.team
 
         ORDER BY auto_location_combined.teamNumber
-        `).all(comp, comp, comp, comp, comp, comp, comp, comp, comp, comp)
-
+        `).all(comp, comp, comp, comp, comp, comp, comp, comp, comp, comp, comp) //Replaces each question mark with the variable comp
+        console.log(data2);
         return(data2);
     }
 

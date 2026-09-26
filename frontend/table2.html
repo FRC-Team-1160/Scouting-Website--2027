@@ -11,6 +11,17 @@
     <body>
         <button onclick="location.href='/'">Back</button>
         <br>
+        <br>
+        <br>
+         <form id="searchBar" action="/search-submit" method="POST">
+            <select id="comp" name ="comp" required>
+                <option value="" disabled selected hidden>Look for a comp</option>
+                <option value="CA District Ventura County Event 2026">CA District Ventura County Event 2026</option>
+                <option value="CA District San Gabriel Valley Event 2026">CA District San Gabriel Valley Event 2026</option>
+                <option value="FIRST California Southern State Championship presented by Qualcomm 2026">FIRST California Southern State Championship presented by Qualcomm 2026</option>
+            </select>
+            <button type="submit">&#x1F50D; Search</button>
+        </form>
         <table id="table2">
             <thead>
                 <tr>
@@ -25,8 +36,8 @@
                     <th>Did they pull their own weight?</th>
                     <th>Travel Preference</th>
                     <th>Did they Climb</th>
-                   <!-- <th>Where did they climb</th>
-                    <th>Did they get disabled</th>
+                   <th>Where did they climb</th>
+                   <!-- <th>Did they get disabled</th>
                     <th>Did they get DQed</th>
                     <th>Notes</th>-->
                 </tr>

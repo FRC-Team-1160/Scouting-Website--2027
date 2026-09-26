@@ -22,7 +22,9 @@ fetch("/search-submit?comp=" + encodeURIComponent(comp))
                     <td>${row.shootRating + "/5"}</td>  
                     <td>${codeToEnglishTable(row.carry.replaceAll(',', ' '))}</td> 
                     <td>${codeToEnglishTable(row.travel.replaceAll(',', ' '))}</td>
-                    <td>${codeToEnglishTable(row.robot_climb.replaceAll(',', ' '))}</td>     
+                    <td>${codeToEnglishTable(row.robot_climb.replaceAll(',', ' '))}</td> 
+                    <td>${codeToEnglishTable(row.climbLocation.replaceAll(',', ' '))}</td>    
+                   
                 </tr>
             `;
         });
@@ -30,8 +32,7 @@ fetch("/search-submit?comp=" + encodeURIComponent(comp))
     });
         /*  
            
-            
-            <td>${row.climbLocation}</td>
+             
             <td>${row.disabled}</td>
             <td>${row.dq}</td>
             <td>${row.notes}</td> 
@@ -59,7 +60,7 @@ function codeToEnglishTable(text) {
         lvl3: "Climbed lvl 3",
         betweenPoles: "Between Poles",
         onSides: "On Sides",
-        noClimb: "Failed Climb",
+        failedClimb: "Failed Climb",
         yes: "Yes",
         no: "No"
     };
